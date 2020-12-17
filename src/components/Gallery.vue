@@ -1,23 +1,37 @@
 <template>
-  <div id="gallery" :class="{'mobile':this.$mq=='sm', 'desktop':this.$mq=='lg'}">
-      <div v-for="product in products" :key="product.id" class="product-card">
+  <div id="gallery" :class="{'mobile':this.$mq=='sm', 'desktop':this.$mq=='lg', 'tablet':this.$mq=='md'}">
+
+      <router-link
+          v-for="product in products"
+          :key="product.id"
+          class="product-card"
+          :to="{name:'productPage', params:{id:product.id}}">
+
         <img :src="product.image">
         <div class="info">
           <h5>{{ product.title }}</h5>
           <p>${{ product.price }} </p>
+<!--          <b-button variant="danger">Add to Cart</b-button>-->
           <hr>
         </div>
-      </div>
+<!--        </router-link>-->
+      </router-link>
+
   </div>
 </template>
 
 <script>
   export default {
     name: 'Gallery',
-    props: ['products'],
+    // props: ['products'],
+    mounted(){
+      fetch('https://fakestoreapi.com/products/').then(res => {
+        return res.json()
+      }).then((data)=>{this.products=data});
+    },
     data(){
       return {
-
+        products:[]
       }
     },
   }
@@ -39,10 +53,8 @@
     width: 90%;
     max-height: 50%;
     align-self: center;
-    transition: all .2s ease-in-out;
   }
   .desktop img:hover {
-    transform: scale(1.2);
   }
 
   hr {
@@ -64,6 +76,7 @@
 
  .product-card{
    display: inline-grid;
+   transition: all .2s ease-in-out;
  }
  .info{
    align-self: end;
@@ -71,11 +84,13 @@
 .info p {
   font-size: medium;
 }
-.info:hover {
-   color: blue;
-}
-.product-card:hover{
+
+  .product-card:hover{
   cursor:pointer;
+  transform: scale(1.2);
 }
+  a:hover{
+    text-decoration: none;
+  }
 
 </style>
