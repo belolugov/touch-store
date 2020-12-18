@@ -5,17 +5,18 @@
     <div class="productInfo">
       <h3>{{ product.title }}</h3>
       <p>{{ product.description }}</p>
-      <p>{{ product.price }}</p>
+      <p>${{ product.price }}</p>
     </div>
   </div>
 </template>
 
 <script>
+  import axios from "axios";
   export default{
     name: 'productPage',
     mounted(){
-      fetch('https://fakestoreapi.com/products/'+ this.$route.params.id).then(res=>{return res.json()}).then((data)=>{this.product=data});
-      },
+        axios.get('https://fakestoreapi.com/products/'+ this.$route.params.id).then(res => this.product=res.data);
+    },
     data() {
       return{
         product: {},
@@ -48,7 +49,4 @@
   .mobile .productInfo {
     grid-column: 1/13;
   }
-
-
-
 </style>

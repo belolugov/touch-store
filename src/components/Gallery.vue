@@ -6,28 +6,23 @@
           :key="product.id"
           class="product-card"
           :to="{name:'productPage', params:{id:product.id}}">
-
         <img :src="product.image">
         <div class="info">
           <h5>{{ product.title }}</h5>
           <p>${{ product.price }} </p>
-<!--          <b-button variant="danger">Add to Cart</b-button>-->
           <hr>
         </div>
-<!--        </router-link>-->
       </router-link>
 
   </div>
 </template>
 
 <script>
+  import axios from 'axios';
   export default {
     name: 'Gallery',
-    // props: ['products'],
     mounted(){
-      fetch('https://fakestoreapi.com/products/').then(res => {
-        return res.json()
-      }).then((data)=>{this.products=data});
+      axios.get('https://fakestoreapi.com/products/').then(res => {this.products = res.data});
     },
     data(){
       return {
