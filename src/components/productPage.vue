@@ -6,6 +6,7 @@
       <h3>{{ product.title }}</h3>
       <p>{{ product.description }}</p>
       <p>${{ product.price }}</p>
+      <button class="btn btn-large btn-danger" @click="addToCart">Add to Cart</button>
     </div>
   </div>
 </template>
@@ -22,6 +23,11 @@
         product: {},
       }
     },
+    methods: {
+      addToCart: function(){
+        this.$emit('addToCart', this.product);
+      }
+    }
   }
 </script>
 
@@ -29,7 +35,10 @@
   #productView{
     display: grid;
     grid-template-columns: repeat(12, 1fr);
+    max-width: 1280px;
+    margin: 2rem auto;
   }
+
   .desktop img {
     max-width: 60%;
     grid-column: 1/6;
@@ -40,6 +49,9 @@
     grid-column: 6/13;
     align-self: center;
     justify-self: center;
+  }
+  .desktop h3 {
+    margin-bottom: 4rem;
   }
   .mobile img {
     max-width: 90%;

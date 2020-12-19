@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <Nav />
-    <router-view></router-view>
+    <Nav :inCart="inCart"/>
+    <router-view @addToCart="addToCart" :inCart="inCart"></router-view>
     <Loader :loading="isLoaderVisible" />
   </div>
 </template>
@@ -15,11 +15,17 @@ export default {
   name: 'App',
   components: {
     Nav,
-    Loader
+    Loader,
   },
   data() {
     return {
-      isLoaderVisible: false
+      isLoaderVisible: false,
+      inCart: [],
+    }
+  },
+  methods: {
+    addToCart: function(product){
+      this.inCart.push({title:product.title, price:product.price});
     }
   },
   created: function () {

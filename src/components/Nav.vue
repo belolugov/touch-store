@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light" v-bind:class=" { 'navbarOpen': show }">
+  <nav class="container navbar navbar-expand-lg navbar-light bg-light" v-bind:class=" { 'navbarOpen': show }">
     <a class="navbar-brand" href="#">Navbar</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" @click.stop="toggleNavbar()">
       <span v-if="!show" class="navbar-toggler-icon"></span>
@@ -14,6 +14,10 @@
           <a class="nav-link" href="#">Link</a>
         </li>
       </ul>
+      <router-link :to="{name:'Cart'}" id="cart-icon">
+      <b-icon  class="h3" icon="cart-2"></b-icon>
+      <span>{{ inCart.length }}</span>
+      </router-link>
     </div>
   </nav>
 </template>
@@ -22,11 +26,12 @@
   export default{
     name: 'Nav',
     props: {
-      msg: String
+      msg: String,
+      inCart: Array
     },
     data() {
       return {
-        show: true
+        show: true,
       }
     },
     methods: {
@@ -38,5 +43,11 @@
 </script>
 
 <style scoped>
-
+  #cart-icon span {
+    position: relative;
+    right: 20px;
+    bottom: 17px;
+    color: red;
+    font-size: x-large;
+  }
 </style>

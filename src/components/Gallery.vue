@@ -40,7 +40,7 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-auto-rows: minmax(150px, auto);
-    grid-gap: 20px;
+    grid-gap: 30px;
     padding: 30px;
     background: aliceblue;
   }
