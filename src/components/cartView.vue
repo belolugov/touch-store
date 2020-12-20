@@ -25,11 +25,14 @@
 
 <style scoped>
   #cart{
-    display: grid;
+    max-width: 1280px;
+    margin: 4rem auto;
   }
-
   ul {
     list-style: none;
+  }
+  li {
+    display: flex;
   }
 
 

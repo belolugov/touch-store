@@ -1,6 +1,6 @@
 <template>
   <div id="gallery" :class="{'mobile':this.$mq=='sm', 'desktop':this.$mq=='lg', 'tablet':this.$mq=='md'}">
-
+      <Search @searchItem="searchItem"/>
       <router-link
           v-for="product in products"
           :key="product.id"
@@ -13,22 +13,34 @@
           <hr>
         </div>
       </router-link>
-
   </div>
 </template>
 
 <script>
   import axios from 'axios';
+  import Search from './Search';
   export default {
     name: 'Gallery',
+    components: {
+      Search
+    },
     mounted(){
       axios.get('https://fakestoreapi.com/products/').then(res => {this.products = res.data});
     },
     data(){
       return {
-        products:[]
+        products: [],
+        searchArray: []
       }
     },
+    methods: {
+      searchItem: function(searchValue){
+        this.searchArray = this.products.filter((x) => {
+          return  x.title.toLowerCase().search(searchValue) > -1;
+        })
+
+      }
+    }
   }
 
 </script>
@@ -50,6 +62,11 @@
     align-self: center;
   }
   .desktop img:hover {
+  }
+  .wrapper {
+    grid-column: 1/5;
+    width: 50%;
+    margin: auto;
   }
 
   hr {
