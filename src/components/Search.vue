@@ -35,7 +35,7 @@
 #search-results{
   position: absolute;
   top: 6rem;
-  width: 50%;
+  width: 100%;
   height: 300px;
   background: black;
 }
@@ -65,12 +65,6 @@
 .search:hover, .search:focus {
   border: 1.5px solid #009688;
   background-color: white;
-}
-#search-results {
-  display: grid;
-  width: 50%;
-  background: #009688;
-  heigth: 150px;
 }
 
 </style>

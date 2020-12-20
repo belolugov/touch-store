@@ -63,7 +63,7 @@
   }
   .desktop img:hover {
   }
-  .wrapper {
+  .wrapper .desktop {
     grid-column: 1/5;
     width: 50%;
     margin: auto;
