@@ -1,7 +1,10 @@
 <template>
   <div id="app">
     <Nav :inCart="inCart"/>
-    <router-view @addToCart="addToCart" :inCart="inCart"></router-view>
+    <router-view
+        @addToCart="addToCart"
+        :inCart="inCart"
+        @deleteItem="deleteItem"></router-view>
     <Loader :loading="isLoaderVisible" />
   </div>
 </template>
@@ -25,7 +28,10 @@ export default {
   },
   methods: {
     addToCart: function(product){
-      this.inCart.push({title:product.title, price:product.price});
+      this.inCart.push(product);
+    },
+    deleteItem: function() {
+
     }
   },
   created: function () {

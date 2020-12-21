@@ -1,6 +1,6 @@
 <template>
   <div id="gallery" :class="{'mobile':this.$mq=='sm', 'desktop':this.$mq=='lg', 'tablet':this.$mq=='md'}">
-      <Search @searchItem="searchItem"/>
+      <Search @searchItem="searchItem" :searchArray="searchArray"/>
       <router-link
           v-for="product in products"
           :key="product.id"
@@ -63,7 +63,7 @@
   }
   .desktop img:hover {
   }
-  .wrapper .desktop {
+  .desktop .wrapper {
     grid-column: 1/5;
     width: 50%;
     margin: auto;
@@ -93,11 +93,11 @@
  .info{
    align-self: end;
  }
-.info p {
+ .info p {
   font-size: medium;
 }
 
-  .product-card:hover{
+ .product-card:hover{
   cursor:pointer;
   transform: scale(1.2);
 }
