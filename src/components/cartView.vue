@@ -1,14 +1,15 @@
 <template>
   <div>
     <ul id="cart" :class="{'mobile':this.$mq=='sm', 'desktop':this.$mq=='lg', 'tablet':this.$mq=='md'}">
-        <li v-for="item in inCart" :key="item.index" >
+        <li v-for="(item, index) in inCart" :key="item.index" >
           <img :src="item.image" alt="">
           <p class="title">{{ item.title }}</p>
           <p class="price">${{ item.price }}</p>
-          <b-icon @click="deleteItem(item.id)" icon="x" class="h1" variant="danger"></b-icon>
+          <b-icon @click="deleteItem(index)" icon="x" class="h1" variant="danger"></b-icon>
         </li>
       <h1 v-if="!inCart.length">Your Cart is Empty</h1>
     </ul>
+
   </div>
 </template>
 
@@ -22,8 +23,8 @@
       }
     },
     methods: {
-      deleteItem: function(id){
-        this.$emit('deleteItem', id);
+      deleteItem: function(index) {
+        this.$emit('deleteItem', index);
       }
     }
   }
@@ -32,7 +33,7 @@
 
 <style scoped>
   #cart{
-    max-width: 1280px;
+    max-width: 960px;
     margin: 4rem auto;
   }
   ul {
@@ -63,9 +64,7 @@
     height: auto;
   }
   .title {
-    margin: 0 20px
+    flex-grow:2;
+    text-align: center;
   }
-
-
-
 </style>

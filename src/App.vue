@@ -30,8 +30,9 @@ export default {
     addToCart: function(product){
       this.inCart.push(product);
     },
-    deleteItem: function() {
+    deleteItem: function(index) {
 
+      this.inCart.splice(index, 1);
     }
   },
   created: function () {

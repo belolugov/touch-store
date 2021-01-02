@@ -55,13 +55,12 @@
   display: flex;
   padding: 15px;
   border-bottom: #b7bbbd 1px solid;
-  transition: all .2s ease-in-out;
 }
 .product-search:hover {
   cursor: pointer;
   text-decoration: none;
-  transform: scale(1.1);
-  border-bottom: none;
+  background: aliceblue;
+  color: black;
 }
 .info-search {
   align-self: center;

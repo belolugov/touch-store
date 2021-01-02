@@ -54,7 +54,6 @@
     grid-auto-rows: minmax(150px, auto);
     grid-gap: 30px;
     padding: 30px;
-    background: aliceblue;
   }
   .desktop img {
     width: 90%;
