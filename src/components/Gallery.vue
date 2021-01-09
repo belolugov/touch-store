@@ -1,10 +1,10 @@
 <template>
   <div id="gallery" :class="{'mobile':this.$mq=='sm', 'desktop':this.$mq=='lg', 'tablet':this.$mq=='md'}">
-      <Search @searchItem="searchItem" :searchArray="searchArray"/>
+      <Search @searchItem="searchItem" @clearSearch="searchArray=[]" :searchArray="searchArray"/>
       <router-link
           v-for="product in products"
           :key="product.id"
-          class="product-card"
+          :class="{'card-blur':searchArray.length, 'product-card':true}"
           :to="{name:'productPage', params:{id:product.id}}">
         <img :src="product.image">
         <div class="info">
@@ -30,15 +30,17 @@
     data(){
       return {
         products: [],
-        searchArray: []
+        searchArray: [],
       }
     },
     methods: {
       searchItem: function(searchValue){
+        if(searchValue === '') this.searchArray = [];
+        else {
         this.searchArray = this.products.filter((x) => {
           return  x.title.toLowerCase().search(searchValue) > -1;
-        })
-
+          })
+        }
       }
     }
   }
@@ -66,6 +68,9 @@
     grid-column: 1/5;
     width: 50%;
     margin: auto;
+  }
+  .card-blur {
+    filter: blur(4px);
   }
 
   hr {

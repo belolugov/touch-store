@@ -16,7 +16,7 @@
       </ul>
       <router-link :to="{name:'Cart'}" id="cart-icon">
       <b-icon  class="h3" icon="cart-2"></b-icon>
-      <span>{{ inCart.length }}</span>
+      <span>{{ inCart.length ? inCart.length : '' }}</span>
       </router-link>
     </div>
   </nav>
