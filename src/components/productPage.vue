@@ -12,20 +12,27 @@
 </template>
 
 <script>
-  import axios from "axios";
   export default{
     name: 'productPage',
-    mounted(){
-        axios.get('https://fakestoreapi.com/products/'+ this.$route.params.id).then(res => this.product=res.data);
-    },
-    data() {
-      return{
-        product: {},
+    created () {
+      // CHECK IF THE PRODUCT IS IN STORE OR IN THE ROUTE PARAMS, FETCH IF NOT
+      if ( !this.$route.params.product && Object.keys(this.$store.state.product ).length === 0 ) {
+        this.$store.dispatch('loadItem', this.$route.params.id )
+      } else if ( this.$route.params.product ) {
+        this.$store.commit('GET_ITEM', this.$route.params.product )
       }
     },
+    data () {
+      return {}
+    },
     methods: {
-      addToCart: function(){
-        this.$emit('addToCart', this.product);
+      addToCart () {
+        this.$emit('addToCart', this.product )
+      },
+    },
+    computed: {
+      product () {
+          return this.$store.state.product
       }
     }
   }

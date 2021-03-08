@@ -4,15 +4,16 @@
     <router-view
         @addToCart="addToCart"
         :inCart="inCart"
-        @deleteItem="deleteItem"></router-view>
+        ></router-view>
     <Loader :loading="isLoaderVisible" />
   </div>
 </template>
 
 <script>
-import Nav from '@/components/Nav';
-import Loader from '@/common/Loader';
-import axios from 'axios';
+import Nav from '@/components/Nav'
+import Loader from '@/common/Loader'
+import Vue from 'vue'
+import axios from 'axios'
 
 export default {
   name: 'App',
@@ -20,6 +21,7 @@ export default {
     Nav,
     Loader,
   },
+
   data() {
     return {
       isLoaderVisible: false,
@@ -27,28 +29,35 @@ export default {
     }
   },
   methods: {
-    addToCart: function(product){
-      this.inCart.push(product);
-    },
-    deleteItem: function(index) {
-
-      this.inCart.splice(index, 1);
+    addToCart (product) {
+      let added = false
+      for ( let item of this.inCart ) {
+        if ( item.id === product.id ) {
+          item.qty += 1
+          added = true
+          }
+        }
+      if ( !added ) {
+        Vue.set(product, 'qty', 1)
+        this.inCart.push(product)
+      }
     }
   },
   created: function () {
-    let that = this;
+    this.$store.dispatch('loadProducts')
+    let that = this
     axios.interceptors.request.use(function (config) {
-      that.isLoaderVisible = true;
+      that.isLoaderVisible = true
       return config
     }, function (error) {
-      return Promise.reject(error);
+      return Promise.reject(error)
     });
 
     axios.interceptors.response.use(function (response) {
-      that.isLoaderVisible = false;
-      return response;
+      that.isLoaderVisible = false
+      return response
     }, function (error) {
-      return Promise.reject(error);
+      return Promise.reject(error)
     });
   }
 }

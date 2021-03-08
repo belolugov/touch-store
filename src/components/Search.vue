@@ -30,10 +30,10 @@
       }
     },
     methods: {
-      searchItem: function() {
+      searchItem() {
         this.$emit('searchItem', this.searchValue);
       },
-      clearSearch: function() {
+      clearSearch() {
         this.searchValue = '';
         this.$emit('clearSearch');
       }

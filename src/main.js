@@ -3,6 +3,7 @@ import App from './App.vue'
 import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue'
 import VueMq from 'vue-mq'
 import VueRouter from 'vue-router'
+import store from './store.js'
 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
@@ -52,5 +53,6 @@ router.beforeEach((to, from, next) => {
 
 new Vue({
   router:router,
+  store:store,
   render: h => h(App),
 }).$mount('#app')

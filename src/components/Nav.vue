@@ -16,7 +16,7 @@
       </ul>
       <router-link :to="{name:'Cart'}" id="cart-icon">
       <b-icon  class="h3" icon="cart-2"></b-icon>
-      <span>{{ inCart.length ? inCart.length : '' }}</span>
+      <span>{{ calcInCartNum ? calcInCartNum : null}}</span>
       </router-link>
     </div>
   </nav>
@@ -38,7 +38,16 @@
       toggleNavbar() {
         this.show = !this.show
       }
-    }
+    },
+    computed: {
+      calcInCartNum() {
+        let inCartNum = 0;
+        for(let i of this.inCart) {
+          inCartNum += i.qty;
+        }
+        return inCartNum;
+      }
+    },
   }
 </script>
 

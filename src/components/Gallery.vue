@@ -1,11 +1,11 @@
 <template>
   <div id="gallery" :class="{'mobile':this.$mq=='sm', 'desktop':this.$mq=='lg', 'tablet':this.$mq=='md'}">
       <Search @searchItem="searchItem" @clearSearch="searchArray=[]" :searchArray="searchArray"/>
-      <router-link
+    <router-link
           v-for="product in products"
           :key="product.id"
           :class="{'card-blur':searchArray.length, 'product-card':true}"
-          :to="{name:'productPage', params:{id:product.id}}">
+          :to="{name:'productPage', params:{id:product.id, product:product}}">
         <img :src="product.image">
         <div class="info">
           <h5>{{ product.title }}</h5>
@@ -17,19 +17,15 @@
 </template>
 
 <script>
-  import axios from 'axios';
   import Search from './Search';
   export default {
     name: 'Gallery',
     components: {
       Search
     },
-    mounted(){
-      axios.get('https://fakestoreapi.com/products/').then(res => {this.products = res.data});
-    },
+
     data(){
       return {
-        products: [],
         searchArray: [],
       }
     },
@@ -41,6 +37,11 @@
           return  x.title.toLowerCase().search(searchValue) > -1;
           })
         }
+      }
+    },
+    computed: {
+      products() {
+        return this.$store.state.products;
       }
     }
   }
