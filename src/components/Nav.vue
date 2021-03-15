@@ -14,7 +14,7 @@
           <a class="nav-link" href="#">Link</a>
         </li>
       </ul>
-      <router-link :to="{name:'Cart'}" id="cart-icon">
+      <router-link :to="{ name:'Cart' }" id="cart-icon">
       <b-icon  class="h3" icon="cart-2"></b-icon>
       <span>{{ calcInCartNum ? calcInCartNum : null}}</span>
       </router-link>
@@ -25,22 +25,19 @@
 <script>
   export default{
     name: 'Nav',
-    props: {
-      msg: String,
-      inCart: Array
-    },
-    data() {
+    props: ['inCart'],
+    data () {
       return {
         show: false,
       }
     },
     methods: {
-      toggleNavbar() {
+      toggleNavbar () {
         this.show = !this.show
       }
     },
     computed: {
-      calcInCartNum() {
+      calcInCartNum () {
         let inCartNum = 0;
         for(let i of this.inCart) {
           inCartNum += i.qty;

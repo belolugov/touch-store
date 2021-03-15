@@ -3,6 +3,7 @@
     <Nav :inCart="inCart"/>
     <router-view
         @addToCart="addToCart"
+        @deleteItem="deleteItem"
         :inCart="inCart"
         ></router-view>
     <Loader :loading="isLoaderVisible" />
@@ -21,30 +22,8 @@ export default {
     Nav,
     Loader,
   },
-
-  data() {
-    return {
-      isLoaderVisible: false,
-      inCart: [],
-    }
-  },
-  methods: {
-    addToCart (product) {
-      let added = false
-      for ( let item of this.inCart ) {
-        if ( item.id === product.id ) {
-          item.qty += 1
-          added = true
-          }
-        }
-      if ( !added ) {
-        Vue.set(product, 'qty', 1)
-        this.inCart.push(product)
-      }
-    }
-  },
-  created: function () {
-    this.$store.dispatch('loadProducts')
+  async created() {
+    await this.$store.dispatch('loadProducts')
     let that = this
     axios.interceptors.request.use(function (config) {
       that.isLoaderVisible = true
@@ -59,6 +38,30 @@ export default {
     }, function (error) {
       return Promise.reject(error)
     });
+  },
+  data() {
+    return {
+      isLoaderVisible: false,
+      inCart: [],
+    }
+  },
+  methods: {
+    addToCart(product) {
+      let added = false
+      for (let item of this.inCart) {
+        if (item.id === product.id) {
+          item.qty += 1
+          added = true
+        }
+      }
+      if (!added) {
+        Vue.set(product, 'qty', 1)
+        this.inCart.push(product)
+      }
+    },
+    deleteItem(index) {
+      this.inCart.splice(index, 1)
+    },
   }
 }
 

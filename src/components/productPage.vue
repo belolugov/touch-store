@@ -6,7 +6,7 @@
       <h3>{{ product.title }}</h3>
       <p>{{ product.description }}</p>
       <p>${{ product.price }}</p>
-      <button class="btn btn-large btn-danger" @click="addToCart">Add to Cart</button>
+      <button class="btn btn-large btn-outline-danger" @click="addToCart">Add to Cart</button>
     </div>
   </div>
 </template>
