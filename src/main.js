@@ -9,7 +9,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import productPage from "@/components/productPage";
 import Gallery from "@/components/Gallery";
-import cartView from "@/components/cartView";
+import Cart from "@/components/cart/Cart";
 
 Vue.use(VueMq, {
   breakpoints: { // default breakpoints - customize this
@@ -35,7 +35,7 @@ const routes = [
     }
   },
   {
-    name: 'Cart',path: '/cart', component: cartView, meta: {
+    name: 'Cart',path: '/cart', component: Cart, meta: {
       title: "Your Cart"
     }
   }

@@ -1,29 +1,26 @@
 <template>
   <div id="app">
-    <Nav :inCart="inCart"/>
-    <router-view
-        @addToCart="addToCart"
-        @deleteItem="deleteItem"
-        :inCart="inCart"
-        ></router-view>
+    <Header :inCart="cart" />
+    <router-view />
     <Loader :loading="isLoaderVisible" />
   </div>
 </template>
 
 <script>
-import Nav from '@/components/Nav'
+import Header from '@/components/header/Header'
 import Loader from '@/common/Loader'
-import Vue from 'vue'
+import { mapState } from 'vuex'
 import axios from 'axios'
 
 export default {
   name: 'App',
   components: {
-    Nav,
+    Header,
     Loader,
   },
-  async created() {
-    await this.$store.dispatch('loadProducts')
+  created () {
+    this.$store.dispatch('loadProducts')
+    this.$store.dispatch('getCart')
     let that = this
     axios.interceptors.request.use(function (config) {
       that.isLoaderVisible = true
@@ -39,39 +36,17 @@ export default {
       return Promise.reject(error)
     });
   },
-  data() {
+  mounted () {
+    // Save cart to local storage
+    window.addEventListener("beforeunload", () => localStorage.setItem('inCart', JSON.stringify(this.cart)))
+  },
+  data () {
     return {
       isLoaderVisible: false,
-      inCart: [],
     }
   },
-  methods: {
-    addToCart(product) {
-      let added = false
-      for (let item of this.inCart) {
-        if (item.id === product.id) {
-          item.qty += 1
-          added = true
-        }
-      }
-      if (!added) {
-        Vue.set(product, 'qty', 1)
-        this.inCart.push(product)
-      }
-    },
-    deleteItem(index) {
-      this.inCart.splice(index, 1)
-    },
-  }
+  computed: mapState({
+      cart: state => state.cart
+             })
 }
-
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-}
-</style>

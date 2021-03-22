@@ -1,7 +1,7 @@
 <template>
   <router-link
       :to="{ name:'productPage', params: { id:product.id, product:product }}">
-    <img :src="product.image">
+    <img :src="/*product.image*/ 'http://pngimg.com/uploads/cocacola/cocacola_PNG0.png'">
     <div class="info info-search" >
       <h5>{{ product.title }}</h5>
       <p>${{ product.price }}</p>
@@ -18,7 +18,7 @@ export default {
 </script>
 
 <style scoped>
- /* GALLERY PRODUCT CARD STYLES */
+ /* Gallery product card styles */
   .desktop img {
     width: 90%;
     max-height: 50%;
@@ -61,7 +61,7 @@ export default {
     text-decoration: none;
   }
 
- /* SEARCH DROPDOWN PRODUCT CARD STYLES */
+ /* Search dropdown product card styles */
 
  .product-search {
     display: flex;

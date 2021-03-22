@@ -1,7 +1,7 @@
 <template>
   <div id="productView"
        :class="{'mobile':this.$mq=='sm', 'desktop':this.$mq=='lg', 'tablet':this.$mq=='md'}">
-    <img :src="product.image" alt="">
+    <img :src="/*product.image*/ 'http://pngimg.com/uploads/cocacola/cocacola_PNG0.png'">
     <div class="productInfo">
       <h3>{{ product.title }}</h3>
       <p>{{ product.description }}</p>
@@ -22,12 +22,9 @@
         this.$store.commit('GET_ITEM', this.$route.params.product )
       }
     },
-    data () {
-      return {}
-    },
     methods: {
       addToCart () {
-        this.$emit('addToCart', this.product )
+        this.$store.dispatch('addToCart', this.product)
       },
     },
     computed: {

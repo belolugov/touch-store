@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <ul id="cart" :class="{ 'mobile':this.$mq=='sm', 'desktop':this.$mq=='lg', 'tablet':this.$mq=='md' }">
-        <li v-for="(item, index) in inCart" :key="index">
+        <li v-for="(item, index) in cart" :key="index">
           <div class="image-container"><img :src="item.image" alt="item image"></div>
           <div class="title">{{ item.title }}
             <b-form-select v-model="item.qty"
@@ -9,48 +9,46 @@
                            size="sm"
                            class="select-quantity mt-3"
                            ></b-form-select>
-            <button class=" btn btn-outline-danger delete my-2" @click="deleteItem ( index )">Delete</button>
+            <button class=" btn btn-outline-danger delete my-2" @click="deleteItem(index)">Delete</button>
           </div>
           <p class="price">${{ item.price }}</p>
         </li>
-      <p v-if="!inCart.length"> {{ localS }} </p>
     </ul>
-    <div id="total" v-if="inCart.length">Your Total: {{ calcTotal }}</div>
+    <emptyCart v-if="!cart.length" />
+    <div id="total" v-if="cart.length">Your Total: {{ calcTotal }}</div>
   </div>
 </template>
 
 <script>
+  import emptyCart from "./emptyCart.vue"
   export default{
-    name: 'cartView',
-    props: ['inCart'],
+    name: 'Cart',
+    components: {
+      emptyCart
+    },
     methods: {
-      deleteItem ( index ) {
-        this.$emit('deleteItem', index)
+      deleteItem (index) {
+        this.$store.dispatch('deleteItem', index)
       }
     },
     computed: {
-      // localS () {
-      //    if (this.inCart.length > 0) {
-      //    const inCartQty = this.inCart.reduce((prev, next) => prev.qty + next.qty)
-      //    console.log(inCartQty)
-      //    localStorage.setItem('inCartQty', inCartQty)
-      // },
       calcTotal () {
         let total = 0;
-        for ( let item of this.inCart ) {
-          total += item.price*item.qty;
-        }
+        this.cart.forEach(item => total += item.price * item.qty)
         return total.toFixed(2);
       },
       selectOptions () {
         const options = []
-        for ( let i = 1; i < 21; ++i ) {
+        for ( let i = 1; i <= 10; ++i ) {
           const option = { value: i, text: i.toString() }
           options.push(option)
         }
         return options
+      },
+      cart () {
+        return this.$store.state.cart
       }
-    }
+    },
   }
 </script>
 
