@@ -47,7 +47,7 @@ export default new Vuex.Store({
             let added = false
             // Check if the item is in cart, if yes, increment the amount by 1
             for (let item of cart) {
-                if (item.id === item.id) {
+                if (item.id === product.id) {
                     item.qty += 1
                     added = true
                 }
