@@ -1,24 +1,28 @@
 <template>
-  <div id="gallery" :class="{ 'mobile':this.$mq=='sm', 'desktop':this.$mq=='lg', 'tablet':this.$mq=='md' }">
-    <Search @searchItem="searchItem" @clearSearch="searchArray=[]" :searchArray="searchArray"/>
-    <productCard
+  <div>
+    <Search @searchItem="searchItem" @clearSearch="searchArray = []" :searchArray="searchArray"/>
+    <product-card
         v-for="product in products"
         :key="product.id"
         :product="product"
         :searchArray="searchArray"
         :class="{ 'card-blur':searchArray.length, 'product-card':true }"
-    />
+    >
+      <btn-group :product="product"/>
+    </product-card>
   </div>
 </template>
 
 <script>
+  import BtnGroup from './product-card/BtnGroup'
+  import ProductCard from './product-card/ProductCard'
   import Search from './Search'
-  import productCard from './productCard'
   export default {
     name: 'Gallery',
     components: {
-      Search,
-      productCard
+      BtnGroup,
+      ProductCard,
+      Search
     },
     data () {
       return {
@@ -53,8 +57,6 @@
     grid-auto-rows: minmax(150px, auto);
     grid-gap: 30px;
     padding: 30px;
-  }
-  .desktop img:hover {
   }
   .desktop .wrapper {
     grid-column: 1/5;

@@ -1,49 +1,36 @@
 <template>
-  <div class="container">
-    <ul id="cart" :class="{ 'mobile':this.$mq=='sm', 'desktop':this.$mq=='lg', 'tablet':this.$mq=='md' }">
-        <li v-for="(item, index) in cart" :key="index">
-          <div class="image-container"><img :src="item.image" alt="item image"></div>
-          <div class="title">{{ item.title }}
-            <b-form-select v-model="item.qty"
-                           :options="selectOptions"
-                           size="sm"
-                           class="select-quantity mt-3"
-                           ></b-form-select>
-            <button class=" btn btn-outline-danger delete my-2" @click="deleteItem(index)">Delete</button>
+  <b-container>
+    <ul class="cart">
+        <li v-for="(product, index) in cart" :key="index">
+          <div class="image-container"><img :src="product.image" alt="item image"></div>
+          <div class="title">{{ product.title }}
+            <Select :product="product"/>
+            <btn-group :product="product" :index="index" />
           </div>
-          <p class="price">${{ item.price }}</p>
+          <p class="price">${{ product.price }}</p>
         </li>
     </ul>
-    <emptyCart v-if="!cart.length" />
-    <div id="total" v-if="cart.length">Your Total: {{ calcTotal }}</div>
-  </div>
+    <empty-cart v-if="!cart.length" />
+    <div class="total" v-if="cart.length">Your Total: {{ calcTotal }}</div>
+  </b-container>
 </template>
 
 <script>
-  import emptyCart from "./emptyCart.vue"
+  import BtnGroup from "@/components/product-card/BtnGroup";
+  import EmptyCart from "./EmptyCart.vue"
+  import Select from "@/components/cart/Select";
   export default{
     name: 'Cart',
     components: {
-      emptyCart
-    },
-    methods: {
-      deleteItem (index) {
-        this.$store.dispatch('deleteItem', index)
-      }
+      BtnGroup,
+      EmptyCart,
+      Select
     },
     computed: {
       calcTotal () {
         let total = 0;
         this.cart.forEach(item => total += item.price * item.qty)
         return total.toFixed(2);
-      },
-      selectOptions () {
-        const options = []
-        for ( let i = 1; i <= 10; ++i ) {
-          const option = { value: i, text: i.toString() }
-          options.push(option)
-        }
-        return options
       },
       cart () {
         return this.$store.state.cart
@@ -53,7 +40,7 @@
 </script>
 
 <style scoped>
-  #cart {
+  .cart {
     max-width: 960px;
     margin: 4rem auto;
   }
@@ -75,7 +62,6 @@
   }
   .desktop li div {
     text-align: left;
-    padding-left: 3rem;
   }
   li:hover {
     cursor:pointer;
@@ -100,17 +86,11 @@
     flex-grow:2;
     text-align: center;
   }
-  .select-quantity {
-    display: block;
-    width: 10%;
-  }
-  .mobile .select-quantity {
-    width: 35%;
-  }
+
   .price {
     font-weight: bold;
   }
-  #total {
+  .total {
     float: right;
   }
   .delete {

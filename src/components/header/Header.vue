@@ -1,24 +1,26 @@
 <template>
   <Nav>
-    <cartIcon :cartNum="calcInCartNum"/>
+    <cart-icon :cartNum="calcInCartNum" />
   </Nav>
 </template>
 
 <script>
+  import CartIcon from "@/components/header/CartIcon";
   import Nav from './Nav'
-  import cartIcon from "@/components/header/cartIcon";
   export default{
     name: 'Header',
     components: {
-      Nav,
-      cartIcon
+      CartIcon,
+      Nav
     },
-    props: ['inCart'],
+    props: {
+      cart: Array
+    },
     computed: {
       calcInCartNum () {
-        let inCartNum = 0;
-        this.inCart.forEach(item => inCartNum += item.qty)
-        return inCartNum;
+        let cartNum = 0;
+        this.cart.forEach(item => cartNum += item.qty)
+        return cartNum;
       }
     }
   }

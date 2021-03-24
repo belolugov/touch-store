@@ -7,7 +7,7 @@ import store from './store.js'
 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
-import productPage from "@/components/productPage";
+import ProductPage from "@/components/ProductPage";
 import Gallery from "@/components/Gallery";
 import Cart from "@/components/cart/Cart";
 
@@ -25,7 +25,7 @@ Vue.config.productionTip = false
 
 const routes = [
   {
-    name: 'productPage', path: '/product/:id', component: productPage, meta: {
+    name: 'product-page', path: '/product/:id', component: ProductPage, meta: {
       title: "product"
     }
   },

@@ -1,31 +1,27 @@
 <template>
-  <div id="productView"
-       :class="{'mobile':this.$mq=='sm', 'desktop':this.$mq=='lg', 'tablet':this.$mq=='md'}">
+  <div class="product-page">
     <img :src="/*product.image*/ 'http://pngimg.com/uploads/cocacola/cocacola_PNG0.png'">
-    <div class="productInfo">
+    <div class="product-info">
       <h3>{{ product.title }}</h3>
       <p>{{ product.description }}</p>
       <p>${{ product.price }}</p>
-      <button class="btn btn-large btn-outline-danger" @click="addToCart">Add to Cart</button>
+      <btn-group :product="product"/>
     </div>
   </div>
 </template>
 
 <script>
+  import BtnGroup from "@/components/product-card/BtnGroup";
   export default{
-    name: 'productPage',
+    name: 'ProductPage',
+    components: {BtnGroup},
     created () {
       // CHECK IF THE PRODUCT IS IN STORE OR IN THE ROUTE PARAMS, FETCH IF NOT
-      if ( !this.$route.params.product && Object.keys(this.$store.state.product ).length === 0 ) {
+      if ( !this.$route.params.product && Object.keys(this.product ).length === 0 ) {
         this.$store.dispatch('loadItem', this.$route.params.id )
       } else if ( this.$route.params.product ) {
         this.$store.commit('GET_ITEM', this.$route.params.product )
       }
-    },
-    methods: {
-      addToCart () {
-        this.$store.dispatch('addToCart', this.product)
-      },
     },
     computed: {
       product () {
@@ -36,7 +32,7 @@
 </script>
 
 <style scoped>
-  #productView{
+  .product-page{
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     max-width: 1280px;
@@ -49,7 +45,7 @@
     align-self: center;
     justify-self: center;
   }
-  .desktop .productInfo {
+  .desktop .product-info {
     grid-column: 6/13;
     align-self: center;
     justify-self: center;
@@ -62,7 +58,7 @@
     grid-column: 1/13;
     margin: 50px auto;
   }
-  .mobile .productInfo {
+  .mobile .product-info {
     grid-column: 1/13;
   }
 </style>

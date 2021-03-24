@@ -7,8 +7,10 @@
 
 <script>
 export default {
-  name: "cartIcon",
-  props: ['cartNum']
+  name: "CartIcon",
+  props: {
+    cartNum: Number
+  }
 }
 </script>
 

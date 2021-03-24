@@ -3,22 +3,26 @@
       <input class="search" placeholder="Search" type="text" v-model="searchValue" @keyup="searchItem">
       <b-icon v-if="searchValue" @click="clearSearch" icon="x" class="clear-icon h1" variant="danger"></b-icon>
       <div v-if="searchArray.length" id="search-results">
-        <productCard
+        <product-card
             v-for="product in searchArray"
             :key="product.id"
-            :class="{ 'product-search':true }"
+            class="product-search"
             :product="product"
-        />
+        >
+        <btn-group :product="product"/>
+        </product-card>
       </div>
     </div>
 </template>
 
 <script>
-  import productCard from "./productCard"
+  import ProductCard from "./product-card/ProductCard"
+  import BtnGroup from "@/components/product-card/BtnGroup";
   export default {
     name:'Search',
     components: {
-      productCard
+      BtnGroup,
+      ProductCard
     },
     props: ['searchArray'],
     data () {
@@ -36,7 +40,6 @@
       }
     }
   }
-
 </script>
 
 <style scoped>

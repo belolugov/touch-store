@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  name: "emptyCart"
+  name: "EmptyCart"
 }
 </script>
 

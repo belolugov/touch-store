@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <Header :inCart="cart" />
-    <router-view />
+    <Header :cart="cart" />
+    <router-view :class="{'mobile':this.$mq=='sm', 'desktop':this.$mq=='lg', 'tablet':this.$mq=='md'}" />
     <Loader :loading="isLoaderVisible" />
   </div>
 </template>
@@ -47,6 +47,6 @@ export default {
   },
   computed: mapState({
       cart: state => state.cart
-             })
+  })
 }
 </script>
