@@ -1,7 +1,7 @@
 <template>
   <router-link
       :to="{ name:'product-page', params: { id:product.id, product:product }}">
-    <img :src="/*product.image*/ 'http://pngimg.com/uploads/cocacola/cocacola_PNG0.png'">
+    <img :src="product.image">
     <div class="info info-search" >
       <h5>{{ product.title }}</h5>
       <p>${{ product.price }}</p>

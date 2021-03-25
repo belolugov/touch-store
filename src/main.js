@@ -10,6 +10,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import ProductPage from "@/components/ProductPage";
 import Gallery from "@/components/Gallery";
 import Cart from "@/components/cart/Cart";
+import LandingPage from "@/components/LandingPage";
 
 Vue.use(VueMq, {
   breakpoints: { // default breakpoints - customize this
@@ -30,7 +31,7 @@ const routes = [
     }
   },
   {
-    name: 'Gallery',path: '/', component: Gallery, meta: {
+    name: 'Gallery',path: '/gallery', component: Gallery, meta: {
       title: "Gallery"
     }
   },
@@ -38,8 +39,13 @@ const routes = [
     name: 'Cart',path: '/cart', component: Cart, meta: {
       title: "Your Cart"
     }
-  }
-];
+  },
+  {
+    name: 'landing-page',path: '/', component: LandingPage, meta: {
+      title: "Home"
+    }
+  },
+]
 
 const router = new VueRouter({
   routes:routes

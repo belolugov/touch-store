@@ -1,6 +1,6 @@
 <template>
   <div class="product-page">
-    <img :src="/*product.image*/ 'http://pngimg.com/uploads/cocacola/cocacola_PNG0.png'">
+    <img :src="product.image">
     <div class="product-info">
       <h3>{{ product.title }}</h3>
       <p>{{ product.description }}</p>
