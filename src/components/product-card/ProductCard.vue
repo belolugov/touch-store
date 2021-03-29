@@ -56,7 +56,7 @@ export default {
   .info p {
     font-size: medium;
   }
-  .product-card:hover {
+  .desktop .product-card:hover {
     cursor:pointer;
     transform: scale(1.2);
   }

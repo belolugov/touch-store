@@ -1,5 +1,5 @@
 <template>
-  <div class="product-page">
+  <b-container class="product-page">
     <img :src="product.image">
     <div class="product-info">
       <h3>{{ product.title }}</h3>
@@ -7,7 +7,7 @@
       <p>${{ product.price }}</p>
       <btn-group :product="product"/>
     </div>
-  </div>
+  </b-container>
 </template>
 
 <script>

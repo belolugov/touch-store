@@ -26,7 +26,7 @@ export default {
   },
   computed: {
     isCart () {
-     return this.$route.name === 'Cart'
+     return this.$route.name === 'cart'
       }
     }
   }

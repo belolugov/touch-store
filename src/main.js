@@ -7,10 +7,12 @@ import store from './store.js'
 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
-import ProductPage from "@/components/ProductPage";
-import Gallery from "@/components/Gallery";
-import Cart from "@/components/cart/Cart";
-import LandingPage from "@/components/LandingPage";
+import ProductPage from "@/components/ProductPage"
+import Gallery from "@/components/Gallery"
+import Cart from "@/components/cart/Cart"
+import Home from "@/components/Home/Home"
+import Faq from "@/components/faq/Faq"
+import Contact from "@/components/contact/Contact"
 
 Vue.use(VueMq, {
   breakpoints: { // default breakpoints - customize this
@@ -31,20 +33,30 @@ const routes = [
     }
   },
   {
-    name: 'Gallery',path: '/gallery', component: Gallery, meta: {
+    name: 'gallery',path: '/gallery', component: Gallery, meta: {
       title: "Gallery"
     }
   },
   {
-    name: 'Cart',path: '/cart', component: Cart, meta: {
+    name: 'cart',path: '/cart', component: Cart, meta: {
       title: "Your Cart"
     }
   },
   {
-    name: 'landing-page',path: '/', component: LandingPage, meta: {
+    name: 'home',path: '/', component: Home, meta: {
       title: "Home"
     }
   },
+  {
+    name: 'faq',path: '/faq', component: Faq, meta: {
+      title: "Faq"
+    }
+  },
+  {
+    name: 'contact',path: '/contact', component: Contact, meta: {
+      title: "contact"
+    }
+  }
 ]
 
 const router = new VueRouter({

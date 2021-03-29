@@ -1,6 +1,6 @@
 import Vuex from 'vuex'
 import Vue from "vue"
-import axios from 'axios'
+import db from "@/db";
 Vue.use(Vuex)
 
 
@@ -24,18 +24,19 @@ export default new Vuex.Store({
     },
     actions: {
         loadProducts (context) {
-            axios.get('https://fakestoreapi.herokuapp.com/products/').then(res => {
-                context.commit('GET_PRODUCTS',  res.data)
-            }).catch(error => {
-                throw new Error(`API ${error}`)
+            const products = []
+            db.collection('products').get().then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    const temp = doc.data()
+                    temp.id = doc.id
+                    products.push(temp)
+                })
+                context.commit('GET_PRODUCTS',  products)
             })
           },
         loadItem (context, id) {
-            axios.get('https://fakestoreapi.herokuapp.com/products/' + id).then(res => {
-                    context.commit('GET_ITEM', res.data)
-            }).catch(error => {
-                throw new Error(`API ${error}`)
-            })
+            db.collection("products").doc(id)
+                .get().then(doc => context.commit('GET_ITEM', doc.data()))
         },
         // Cart actions
         getCart (context) {

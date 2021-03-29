@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <b-container>
     <Search @searchItem="searchItem" @clearSearch="searchArray = []" :searchArray="searchArray"/>
     <product-card
         v-for="product in products"
@@ -10,7 +10,7 @@
     >
       <btn-group :product="product"/>
     </product-card>
-  </div>
+  </b-container>
 </template>
 
 <script>

@@ -1,7 +1,7 @@
 <template>
-  <router-link :to="{name:'Cart'}" id="cart-icon">
+  <router-link to="/cart" id="cart-icon">
     <div>
-      <b-icon  class="h3" icon="cart-2" variant="light"></b-icon>
+      <b-icon class="h3" icon="cart-2" variant="light"></b-icon>
       <span v-if="cartNum">{{ cartNum }}</span>
     </div>
   </router-link>
@@ -25,7 +25,12 @@ export default {
     padding: 0 5px;
     vertical-align: top;
   }
-  #cart-icon:hover {
-    opacity: 0.5;
+  svg {
+    transition: all .2s ease-in-out;
+    margin-right: 3px;
+  }
+  svg:hover {
+    cursor: pointer;
+    transform: scale(1.3);
   }
 </style>

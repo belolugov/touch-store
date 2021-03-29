@@ -4,10 +4,10 @@
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
       <b-collapse id="nav-collapse" class="justify-content-center" is-nav>
         <b-navbar-nav>
-          <b-nav-item to="/">Home</b-nav-item>
-          <b-nav-item to="/gallery">Shop</b-nav-item>
-          <b-nav-item to="/faq">FAQ</b-nav-item>
-          <b-nav-item to="/contact">Contact</b-nav-item>
+          <b-nav-item :to="{name: 'home'}">Home</b-nav-item>
+          <b-nav-item :to="{name: 'gallery'}">Shop</b-nav-item>
+          <b-nav-item :to="{name: 'faq'}">FAQ</b-nav-item>
+          <b-nav-item :to="{name: 'contact'}">Contact</b-nav-item>
         </b-navbar-nav>
       </b-collapse>
       <slot></slot>
@@ -33,11 +33,10 @@ export default {
 .navbar-light .navbar-nav .nav-link:hover {
   color: #aacddb !important;
 }
-
 a.nav-link.router-link-exact-active.router-link-active {
   color:#aacddb !important;
 }
-/*ul.navbar-nav {*/
-/*  margin-right: 70px;*/
-/*}*/
+.auth-icon {
+  margin-right: 10px;
+}
 </style>

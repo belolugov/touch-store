@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Header :cart="cart" />
-    <router-view :class="{'mobile':this.$mq=='sm', 'desktop':this.$mq=='lg', 'tablet':this.$mq=='md'}" />
+    <router-view :class="{'mobile':this.$mq=='sm', 'desktop':this.$mq=='lg', 'tablet':this.$mq=='md'}" style="margin-top: 5rem" />
     <Loader :loading="isLoaderVisible" />
   </div>
 </template>
@@ -27,14 +27,14 @@ export default {
       return config
     }, function (error) {
       return Promise.reject(error)
-    });
+    })
 
     axios.interceptors.response.use(function (response) {
       that.isLoaderVisible = false
       return response
     }, function (error) {
       return Promise.reject(error)
-    });
+    })
   },
   mounted () {
     // Save cart to local storage
