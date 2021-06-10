@@ -1,6 +1,5 @@
 <template>
-  <router-link
-      :to="{ name:'product-page', params: { id:product.id, product:product }}">
+  <router-link :to="{ name:'product-page', params: { id:product.id, product:product }}">
     <img :src="product.image">
     <div class="info info-search" >
       <h5>{{ product.title }}</h5>
@@ -13,7 +12,7 @@
 
 <script>
 export default {
-  name: "ProductCard",
+  name: 'ProductCard',
   props: {
     product: Object,
   }

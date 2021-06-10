@@ -1,17 +1,11 @@
 <template>
   <b-container>
-    <h1>Dashboard for users</h1>
+    <h1>Contact Page</h1>
   </b-container>
 </template>
 
 <script>
 export default {
-  name: "Contact",
-  components: {
-  }
+  name: 'Contact'
 }
 </script>
-
-<style scoped>
-
-</style>

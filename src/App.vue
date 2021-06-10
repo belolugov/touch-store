@@ -1,7 +1,8 @@
 <template>
   <div id="app">
     <Header :cart="cart" />
-    <router-view :class="{'mobile':this.$mq=='sm', 'desktop':this.$mq=='lg', 'tablet':this.$mq=='md'}" style="margin-top: 5rem" />
+    <router-view :class="{'mobile':this.$mq=='sm', 'desktop':this.$mq=='lg', 'tablet':this.$mq=='md'}"
+                 style="margin-top: 5rem" />
     <Loader :loading="isLoaderVisible" />
   </div>
 </template>

@@ -1,10 +1,8 @@
 <template>
   <div>
-    <b-navbar class="navbar" toggleable="lg" fixed="top">
-      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+    <b-navbar fixed="top" class="navbar">
       <b-collapse id="nav-collapse" class="justify-content-center" is-nav>
         <b-navbar-nav>
-          <b-nav-item :to="{name: 'home'}">Home</b-nav-item>
           <b-nav-item :to="{name: 'gallery'}">Shop</b-nav-item>
           <b-nav-item :to="{name: 'faq'}">FAQ</b-nav-item>
           <b-nav-item :to="{name: 'contact'}">Contact</b-nav-item>
@@ -35,8 +33,5 @@ export default {
 }
 a.nav-link.router-link-exact-active.router-link-active {
   color:#aacddb !important;
-}
-.auth-icon {
-  margin-right: 10px;
 }
 </style>
